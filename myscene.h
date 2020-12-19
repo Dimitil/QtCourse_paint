@@ -5,6 +5,8 @@
 #include <QAbstractGraphicsShapeItem>
 #include <QColorDialog>
 
+#include "dialog.h"
+
 class MyScene : public QGraphicsScene
 {
     enum class ShapeType{
@@ -19,14 +21,41 @@ class MyScene : public QGraphicsScene
     QPointF m_startPoint;
     QColor ramColor;
     QColor ramBrushColor;
-    uint ramWidth;
+    int ramWidth;
     Qt::PenStyle ramStyle;
 
-
 public:
+
+
     explicit MyScene(QObject *parent = nullptr);
 
 public slots:
+
+    void slotSetRect() {
+        type = ShapeType::RECT;
+    }
+
+    void slotSetElips() {
+        type = ShapeType::ELIPS;
+    }
+
+    void slotCallDialog() {
+        Dialog dlg(ramBrushColor, ramWidth, ramStyle);
+        if (dlg.exec() == QDialog::Accepted) {
+            setColor(dlg.getColor());
+            setRamWidth(dlg.getWidth());
+            setRamStyle(dlg.getStyle());
+        }
+    }
+
+    void setRamWidth(uint w) {
+        ramWidth = w;
+    }
+
+    void setColor(QColor clr) {
+        ramBrushColor = clr;
+    }
+
     void setColor() {
         QColor newColor = QColorDialog::getColor();
         if (newColor.isValid()) {
@@ -34,14 +63,19 @@ public slots:
         }
     }
 
-signals:
+    void setRamStyle(Qt::PenStyle ps) {
+        ramStyle = ps;
+    }
 
+signals:
 
     // QGraphicsScene interface
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+
 };
 
 #endif // MYSCENE_H

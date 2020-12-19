@@ -46,6 +46,10 @@
      <string>Tools</string>
     </property>
     <addaction name="actionColor"/>
+    <addaction name="actionOptions"/>
+    <addaction name="separator"/>
+    <addaction name="actionRect"/>
+    <addaction name="actionElips"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
@@ -62,10 +66,34 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionColor"/>
+   <addaction name="actionOptions"/>
+   <addaction name="actionRect"/>
+   <addaction name="actionElips"/>
   </widget>
   <action name="actionColor">
    <property name="text">
     <string>Color</string>
+   </property>
+  </action>
+  <action name="actionOptions">
+   <property name="text">
+    <string>Options</string>
+   </property>
+  </action>
+  <action name="actionRect">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Rect</string>
+   </property>
+  </action>
+  <action name="actionElips">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Elips</string>
    </property>
   </action>
  </widget>

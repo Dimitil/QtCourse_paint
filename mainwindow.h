@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QActionGroup>
 #include "myscene.h"
 
 QT_BEGIN_NAMESPACE
@@ -12,6 +13,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     MyScene *scene;
+    QActionGroup *pActionGroup;
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -19,5 +21,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H

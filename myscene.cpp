@@ -14,8 +14,14 @@ void MyScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::MouseButton::RightButton) {
         m_startPoint = event->scenePos();
-        m_current = new QGraphicsRectItem(m_startPoint.x(),
-                                          m_startPoint.y(), 0, 0);
+        if (type == ShapeType::RECT) {
+            m_current = new QGraphicsRectItem(m_startPoint.x(),
+                                              m_startPoint.y(), 0, 0);
+        }
+        else if (type == ShapeType::ELIPS) {
+            m_current = new QGraphicsEllipseItem(m_startPoint.x(),
+                                                 m_startPoint.y(), 0, 0);
+        }
         QPen pen;
         pen.setColor(ramColor);
         pen.setStyle(ramStyle);
@@ -35,10 +41,16 @@ void MyScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     if (m_drawingInProcess) {
         QPointF curPos = event->scenePos();
-
         QRectF rect(m_startPoint, curPos);
-        QGraphicsRectItem* tmp = qgraphicsitem_cast<QGraphicsRectItem*>(m_current); //FIXME
-        tmp -> setRect(rect.normalized());
+        if(type == ShapeType::RECT) {
+            QGraphicsRectItem* tmp = qgraphicsitem_cast<QGraphicsRectItem*>(m_current);
+            tmp -> setRect(rect.normalized());
+        }
+        else if(type == ShapeType::ELIPS) {
+            QGraphicsEllipseItem ellips(QRectF(m_startPoint, curPos));
+            QGraphicsEllipseItem* tmp = qgraphicsitem_cast<QGraphicsEllipseItem*>(m_current);
+            tmp -> setRect(rect.normalized());
+        }
     }
     QGraphicsScene::mouseMoveEvent(event);
 }
