@@ -59,8 +59,10 @@ void MyScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::MouseButton::RightButton)
     {
+        emit signalNewShape(type, QRectF(m_current->boundingRect()), ramBrushColor, ramWidth, ramStyle);
         m_drawingInProcess = false;
         m_current = nullptr;
+
     }
     QGraphicsScene::mouseReleaseEvent(event);
 }

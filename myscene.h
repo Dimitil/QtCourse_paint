@@ -9,10 +9,13 @@
 
 class MyScene : public QGraphicsScene
 {
+public:
     enum class ShapeType{
         RECT,
         ELIPS
     };
+
+private:
 
     Q_OBJECT
     QAbstractGraphicsShapeItem *m_current;
@@ -68,7 +71,7 @@ public slots:
     }
 
 signals:
-
+    void signalNewShape(MyScene::ShapeType, QRectF, QColor, uint, Qt::PenStyle);
     // QGraphicsScene interface
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
