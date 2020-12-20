@@ -36,6 +36,11 @@ MainWindow::MainWindow(QWidget *parent)
                                          QColor, uint, Qt::PenStyle)),
             this, SLOT(slotAddItem(MyScene::ShapeType, QRectF,
                                         QColor, uint, Qt::PenStyle)));
+    connect(ui->actionReset, SIGNAL(triggered()), this, SLOT(slotResetScene()));
+
+    connect(ui->rotatePushButton, SIGNAL(clicked()), this, SLOT(slotRotateScene()));
+    connect(ui->scalePushButton, SIGNAL(clicked()), this, SLOT(slotScaleScene()));
+    connect(ui->shearPushButton, SIGNAL(clicked()), this, SLOT(slotShearScene()));
 }
 
 MainWindow::~MainWindow()
@@ -70,6 +75,27 @@ void MainWindow::slotAddItem(MyScene::ShapeType shapeType,
     setColorItem(itemColor, color);
     ui->tableWidget->setItem(curRow, 4, itemColor);
 
+}
+
+void MainWindow::slotRotateScene() {
+    int angle = ui->angleSpinBox->value();
+    ui->graphicsView->rotate(angle);
+}
+
+void MainWindow::slotScaleScene() {
+    int x = ui->xScaleSpinBox->value();
+    int y = ui->yScaleSpinBox->value();
+    ui->graphicsView->scale(x, y);
+}
+
+void MainWindow::slotShearScene() {
+    int x = ui->xShearSpinBox->value();
+    int y = ui->yShearSpinBox->value();
+    ui->graphicsView->shear(x, y);
+}
+
+void MainWindow::slotResetScene() {
+    ui->graphicsView->resetTransform();
 }
 
 void MainWindow::setTypeItem(QTableWidgetItem* itemType, MyScene::ShapeType st) {

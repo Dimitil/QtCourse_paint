@@ -29,6 +29,12 @@ public:
 public slots:
     void slotAddItem(MyScene::ShapeType shapeType, QRectF rect,
                      QColor color,uint penWidth,Qt::PenStyle penStyle);
+
+    void slotRotateScene();
+    void slotScaleScene();
+    void slotShearScene();
+    void slotResetScene();
+
 private:
     Ui::MainWindow *ui;
 
